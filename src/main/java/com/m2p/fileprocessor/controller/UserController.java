@@ -24,11 +24,8 @@ public class UserController {
   @GetMapping(value = "/")
   public ModelAndView getHomePage() {
     ModelAndView modelAndView = new ModelAndView("home");
-    modelAndView.addObject("test", "helo this is vj");
-
     DatabaseConnection connection = DatabaseConnection.getInstance();
     connection.createTable();
-
     return modelAndView;
   }
 
@@ -39,7 +36,6 @@ public class UserController {
 
     List<Object> userDTO = DatabaseConnection.getInstance().getUsers();
 
-    log.info("userDTO :: " + userDTO.size());
     if (userDTO != null && userDTO.size() > 0) modelAndView.addObject("data", userDTO);
     else modelAndView.addObject("data", "No data");
 
@@ -57,9 +53,7 @@ public class UserController {
     }
 
     ReadExcel readExcel = ReadExcel.getInstance();
-    //        readExcel.readExcel(file.getInputStream());
     readExcel.readExcelUsingWorkbook(file.getInputStream());
-    System.out.println("updated the code");
 
     return modelAndView;
   }

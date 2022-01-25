@@ -54,7 +54,7 @@ public class ReadExcel {
     Workbook workbook = WorkbookFactory.create(inputstream);
     try {
       Sheet sheet = workbook.getSheet("data");
-      int rowCount = 20; // sheet.getPhysicalNumberOfRows();
+      int rowCount = sheet.getPhysicalNumberOfRows();
 
       List<Map<String, Object>> allUserInformations = new ArrayList<>();
       allUserInformations.addAll(updateDataToMap(sheet, rowCount, 1));
@@ -81,12 +81,10 @@ public class ReadExcel {
         }
 
         if (eachUserInformations.size() > 0) {
-          log.info("eachUserInformations :: " + eachUserInformations.toString());
           allUserInformations.add(eachUserInformations);
           if (nameValidation(eachUserInformations)
               && mobileNumberValidation(eachUserInformations)
               && dobValidation(eachUserInformations)) {
-            //            persistInDatabase(eachUserInformations);
             DatabaseConnection.getInstance()
                 .insertingUsersIntoDB(
                     new Random().nextInt(1000),
@@ -109,7 +107,6 @@ public class ReadExcel {
   }
   private boolean nameValidation(Map<String, Object> sheetData) {
 
-    log.info("sheetData :: " + sheetData.toString());
     String name =
         (!ObjectUtils.isEmpty(sheetData) && sheetData.containsKey("name"))
             ? String.valueOf(sheetData.get("name"))
@@ -161,13 +158,11 @@ public class ReadExcel {
     try {
       switch (String.valueOf(cell.getCellType())) {
         case "NUMERIC":
-          log.info("test  NUMERIC:: " + sheet.getRow(0).getCell(index).getStringCellValue());
           eachUserInformations.put(
               sheet.getRow(0).getCell(index).getStringCellValue(),
               (long) cell.getNumericCellValue());
           break;
         case "STRING":
-          log.info("test STRING :: " + sheet.getRow(0).getCell(index).getStringCellValue());
           eachUserInformations.put(
               sheet.getRow(0).getCell(index).getStringCellValue(), cell.getStringCellValue());
           break;

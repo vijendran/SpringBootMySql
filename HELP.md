@@ -46,3 +46,8 @@ These additional references should also help you:
   * [https://dev.mysql.com/doc/refman/8.0/en/macos-installation.html](For mac)
 * Running the project can be done seemlessly using intellij UI with out any hustle
 * Database URl and credentials need to be updated only in DatabaseConnection.java
+
+
+### Things Yet to be done 
+* Error page should be handled if imporper url is provided
+* Error page should be handled if imporper url is provided
