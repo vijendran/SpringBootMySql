@@ -11,7 +11,7 @@
 	<p><b>Iterated List:</b><p>
 
 
-<ul>
+  <ul>
 		<c:forEach var="user" items="${data}">
 			<li style="list-style: none !important;">${user.id}  &nbsp; &nbsp;  ${user.name} &nbsp; &nbsp; ${user.dob} &nbsp; &nbsp; ${user.age} &nbsp; &nbsp; ${user.mobileNumber}</li>
 		</c:forEach>
